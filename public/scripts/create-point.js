@@ -1,3 +1,17 @@
+// const button = document.querySelector("form button");
+
+// function validateItems() {
+//   const items = document.querySelector("input[name=items]"); 
+
+//   if (items.value == "") {
+//     alert("Selecione um ou mais itens de coleta");
+//     document.location.href = '/savepoint';
+//   }
+// }
+
+// button.addEventListener("click", validateItems);
+
+
 function populateUFs() {
   const ufSelect = document.querySelector("select[name=uf]");
 

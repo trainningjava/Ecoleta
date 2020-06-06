@@ -135,6 +135,11 @@ form button:hover {
   background-color: #2fb86e;
 }
 
+#msg {
+  color: red;
+  font-size: bold;
+}
+
 .items-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

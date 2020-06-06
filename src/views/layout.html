@@ -13,19 +13,23 @@
 
     <link rel="stylesheet" href="/styles/main.css"/>
 
-    {% block style %}{% endblock style %}
+    {% block style %}
+    {% endblock style %}
 
     <link rel="stylesheet" href="/styles/responsive.css"/>
 
   </head>
   <body>
     <div id="{{pageId}}">
-      {% block content %}{% endblock content %}
+      {% block content %}
+      {% endblock content %}
     </div>
 
-    {% block modal %}{% endblock modal %}
+    {% block modal %}
+    {% endblock modal %}
 
-    {% block scripts %}{% endblock scripts %}
+    {% block scripts %}
+    {% endblock scripts %}
 
   </body>
 </html>

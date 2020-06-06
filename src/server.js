@@ -38,6 +38,11 @@ server.get("/create-point", (req, res) => {
 /*                         S A V E P O I N T                      */
 /* ============================================================== */
 server.post("/savepoint", (req, res) => {
+
+  if (req.body.items == "" ) {
+    return res.render("create-point.html", { msg: true, msgtxt: "Selecione um ou mais itens de coleta" });    
+  }
+
   const query = `
   INSERT INTO places (
     image,
@@ -65,7 +70,7 @@ server.post("/savepoint", (req, res) => {
       console.log("Erro no cadastro");
       console.log(err);
       // return res.send("Erro no cadastro");
-      return res.render("create-point.html", { msg: true });
+      return res.render("create-point.html", { msg: true, msgtxt: "Erro no cadastro" });
     }
 
     console.log("Cadastrado com sucesso");
