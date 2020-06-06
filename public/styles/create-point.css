@@ -36,7 +36,6 @@ form {
   background-color: white;
 
   margin: 80px auto;
-  margin-top: 80px;
   /* preenchimento */
   padding: 64px;
 
@@ -164,6 +163,7 @@ form button:hover {
 }
 
 .items-grid li span {
+  margin-top: 12px;
   flex: 1;
 
   display: flex;
