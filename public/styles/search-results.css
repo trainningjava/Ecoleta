@@ -75,7 +75,7 @@ main .cards img {
 }
 
 main .cards h1 {
-  margin-top: 32px;
+  margin-top: 32px 0 24px;
 
   font-size: 36px;
   line-height: 41px;
@@ -85,7 +85,7 @@ main .cards h1 {
 main .cards h3 {
   margin: 24px 0;
 
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-weight: bold;
 
   font-size: 24px;
