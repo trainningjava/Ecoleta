@@ -8,115 +8,148 @@ module.exports = db;
 
 // Utilizar o objeto de banco de dados, para nossas operações
 
-// db.serialize(() => {
+db.serialize(() => {
+
+/**
+ * Parametros
+ * 2 Insert
+ * 3 Select All
+ * 4 Delete
+ * 5 Delete All
+ */
+
+
+  const step=1
 // COM COMMANDOS SQL QUE EU VOU:
 
-//=========================================================
-//  C R E A T E
-//=========================================================
-// Criar uma tabela
-// db.run(`
-//   CREATE TABLE IF NOT EXISTS places (
-//     id INTEGER PRIMARY KEY AUTOINCREMENT,
-//     image TEXT,
-//     name TEXT,
-//     address TEXT,
-//     address2 TEXT,
-//     state TEXT,
-//     city TEXT,
-//     items TEXT
-//   );
-// `);
-// após digite o comando node src/database/db.js
 
-//=========================================================
-//  I N S E R T
-//=========================================================
+    console.log("=========================================================")
+    console.log("C R E A T E")
+    console.log("=========================================================")
+    // Criar uma tabela
+    db.run(`
+    CREATE TABLE IF NOT EXISTS places (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        image TEXT,
+        name TEXT,
+        address TEXT,
+        address2 TEXT,
+        state TEXT,
+        city TEXT,
+        items TEXT
+    );
+    `);
+    // após digite o comando node src/database/db.js
+if (step==2) {
+
+console.log("=========================================================")
+console.log("I N S E R T")
+console.log("=========================================================")
 // Inserir dados na tabela
-// const query = `
-//   INSERT INTO places (
-//     image,
-//     name,
-//     address,
-//     address2,
-//     state,
-//     city,
-//     items
-//   ) VALUES (?,?,?,?,?,?,?);
-// `;
 
-// const values = [
-//   "https://images.unsplash.com/photo-1528323273322-d81458248d40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1101&q=80",
-//   "Coletoria",
-//   "Guilherme Gemballa, Jardim América",
-//   "Nº 260",
-//   "Santa Catarina",
-//   "Rio do Sul",
-//   "Resíduos Eletrônicos, Lâmpadas",
-// ];
+    const query = `
+    INSERT INTO places (
+      image,
+      name,
+      address,
+      address2,
+      state,
+      city,
+      items
+    ) VALUES (?,?,?,?,?,?,?);
+  `;
+  
+  const values = [ {
+  "image":"https://images.unsplash.com/photo-1528323273322-d81458248d40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1101&q=80",
+  "name":"Coletoria",
+  "address":"Guilherme Gemballa, Jardim América",
+  "address2":"Nº 260",
+  "state":"Santa Catarina",
+  "city":"Rio do Sul",
+  "items":"Resíduos Eletrônicos, Lâmpadas",
+  }, {
+  
+      "image":"https://images.unsplash.com/photo-1567393528677-d6adae7d4a0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+      "name":"Papersider",
+      "address":"Guilherme Gemballa, Jardim América",
+      "address2":"Nº 260",
+      "state":"Santa Catarina",
+      "city":"Rio do Sul",
+      "items":"Papéis e Papelão",
+  }];
+  
+  function afterInsertData(err) {
+    if (err) {
+      return console.log(err);
+    }
+  
+    console.log("Cadastrado com sucesso");
+    console.log(this);
+  }
+  
+  
+  // comando que adicionar informações na tabela
+  for(var i = 0; i < values.length; i++) {
+      const  arrObject = values[i];
+      const arrvalues = []
+    for(var key in arrObject){
+        if(arrObject.hasOwnProperty(key)) {
+            arrvalues.push(arrObject[key]);
+            console.info(arrObject[key]);
+        }
+   }      
+   db.run(query, arrvalues, afterInsertData);
 
-// const values = [
-//   "https://images.unsplash.com/photo-1567393528677-d6adae7d4a0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-//   "Papersider",
-//   "Guilherme Gemballa, Jardim América",
-//   "Nº 260",
-//   "Santa Catarina",
-//   "Rio do Sul",
-//   "Papéis e Papelão",
-// ];
+}
+  
+  // após digite o comando node src/database/db.js
+  // e comente o comando db.run(query, values, afterInsertData);
+  // para não adicionar novas informações
 
-// function afterInsertData(err) {
-//   if (err) {
-//     return console.log(err);
-//   }
+} else if (step == 3 ) {
+    console.log("=========================================================")
+    console.log("S E L E C T * A L L") 
+    console.log("=========================================================")
+    // Consultar os dados da tabela
 
-//   console.log("Cadastrado com sucesso");
-//   console.log(this);
-// }
+    db.all(`SELECT * FROM places`, function (err, rows) {
+      if (err) {
+        return console.log(err);
+      }
 
-// comando que adicionar informações na tabela
-// db.run(query, values, afterInsertData);
+      console.log("Aqui estão seus registros: ");
+      console.log(rows);
+    });
+    // após digite o comando node src/database/db.js
+    // e mostrará o registro da tabela places
 
-// após digite o comando node src/database/db.js
-// e comente o comando db.run(query, values, afterInsertData);
-// para não adicionar novas informações
+} else if (step==4) {
+    console.log("=========================================================")
+    console.log("D E L E T E")
+    console.log("=========================================================")
+    // Deletar um dado da tabela
+    db.run(`DELETE FROM places WHERE id = ?`, [1], function (err) {
+    if (err) {
+        return console.log(err);
+    }
 
-//=========================================================
-//  S E L E C T
-//=========================================================
-// Consultar os dados da tabela
+    console.log("Registro excluido com sucesso!");
+    });
 
-// db.all(`SELECT * FROM places`, function (err, rows) {
-//   if (err) {
-//     return console.log(err);
-//   }
+} else if (step==5) {
+    console.log("=========================================================")
+    console.log("D E L E T E * A L L")
+    console.log("=========================================================")
 
-//   console.log("Aqui estão seus registros: ");
-//   console.log(rows);
-// });
-// após digite o comando node src/database/db.js
-// e mostrará o registro da tabela places
+    db.run(`DELETE FROM places`, function (err) {
+    if (err) {
+      return console.log(err);
+    }
 
-//=========================================================
-//  D E L E T E
-//=========================================================
-// Deletar um dado da tabela
-// db.run(`DELETE FROM places WHERE id = ?`, [1], function (err) {
-//   if (err) {
-//     return console.log(err);
-//   }
+    console.log("Todos os registro excluido com sucesso!");
+  });
 
-//   console.log("Registro excluido com sucesso!");
-// });
+}
 
-//=========================================================
-//  D E L E T E * A L L
-//=========================================================
-//   db.run(`DELETE FROM places`, function (err) {
-//     if (err) {
-//       return console.log(err);
-//     }
 
-//     console.log("Registro excluido com sucesso!");
-//   });
-// });
+});
