@@ -22,7 +22,6 @@ db.serialize(() => {
   const step=1
 // COM COMMANDOS SQL QUE EU VOU:
 
-
     console.log("=========================================================")
     console.log("C R E A T E")
     console.log("=========================================================")
@@ -39,6 +38,14 @@ db.serialize(() => {
         items TEXT
     );
     `);
+    db.run(`
+    CREATE TABLE IF NOT EXISTS items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        description TEXT,
+        image TEXT
+    );
+    `);
+
     // após digite o comando node src/database/db.js
 if (step==2) {
 
@@ -47,7 +54,7 @@ console.log("I N S E R T")
 console.log("=========================================================")
 // Inserir dados na tabela
 
-    const query = `
+    let query = `
     INSERT INTO places (
       image,
       name,
@@ -59,7 +66,7 @@ console.log("=========================================================")
     ) VALUES (?,?,?,?,?,?,?);
   `;
   
-  const values = [ {
+  let values = [ {
   "image":"https://images.unsplash.com/photo-1528323273322-d81458248d40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1101&q=80",
   "name":"Coletoria",
   "address":"Guilherme Gemballa, Jardim América",
@@ -77,7 +84,39 @@ console.log("=========================================================")
       "city":"Rio do Sul",
       "items":"Papéis e Papelão",
   }];
-  
+
+  runInsertData();
+
+  query = `
+    INSERT INTO items (
+      description,
+      image
+    ) VALUES (?,?);
+  `;
+
+  values = [ {
+    "description":"Lâmpadas",
+    "image":"/assets/lampadas.svg"
+    }, {
+      "description":"Pilhas e Baterias",
+      "image":"/assets/baterias.svg"
+    }, {
+      "description":">Papéis e Papelão",
+      "image":"/assets/papeis-papelao.svg"
+    }, {
+      "description":"Resíduos Eletrônicos",
+      "image":"/assets/eletronicos.svg"
+    }, {
+      "description":"Resíduos Orgânicos",
+      "image":"/assets/organicos.svg"
+    }, {
+      "description":"Óleo de Cozinha",
+      "image":"/assets/oleo.svg"
+    }];
+
+    runInsertData();
+
+
   function afterInsertData(err) {
     if (err) {
       return console.log(err);
@@ -87,20 +126,20 @@ console.log("=========================================================")
     console.log(this);
   }
   
-  
-  // comando que adicionar informações na tabela
-  for(var i = 0; i < values.length; i++) {
+  function runInsertData() {
+    // comando que adicionar informações na tabela
+    for(var i = 0; i < values.length; i++) {
       const  arrObject = values[i];
       const arrvalues = []
-    for(var key in arrObject){
-        if(arrObject.hasOwnProperty(key)) {
-            arrvalues.push(arrObject[key]);
-            console.info(arrObject[key]);
-        }
-   }      
-   db.run(query, arrvalues, afterInsertData);
-
-}
+      for(var key in arrObject){
+          if(arrObject.hasOwnProperty(key)) {
+              arrvalues.push(arrObject[key]);
+              // console.info(arrObject[key]);
+          }
+      }      
+      db.run(query, arrvalues, afterInsertData);
+    }
+  }
   
   // após digite o comando node src/database/db.js
   // e comente o comando db.run(query, values, afterInsertData);

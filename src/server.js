@@ -83,6 +83,23 @@ server.post("/savepoint", (req, res) => {
 /* ============================================================== */
 /*                         S E A R C H                            */
 /* ============================================================== */
+server.get("/itemsCollect", (req, res) => {
+  db.all(`SELECT * FROM items `, function (
+    err,
+    items
+  ) {
+    if (err) {
+      console.log(err);
+      console.log("Erro na consulta");
+    }
+    const total = items.length;
+    console.log(items);
+    return res.json(items);
+  
+  });
+});
+
+
 server.get("/search", (req, res) => {
   const search = req.query.search;
 
@@ -113,6 +130,29 @@ server.get("/search", (req, res) => {
     return res.render("search-results.html", { places: rows, total });
   });
 });
+
+/* ============================================================== */
+/*                        S E A R C H 2                           */
+/* ============================================================== */
+server.get("/updsrpoint", (req, res) => {
+  const id = req.query.id;
+  db.all(`SELECT * FROM places WHERE id = ?`, [id], function (
+    err,
+    items
+  ) {
+    if (err) {
+      console.log(err);
+      console.log("Erro na consulta");
+    }
+    console.log(items);
+  
+  });
+});
+
+/* ============================================================== */
+/*                         U P D A T E                            */
+/* ============================================================== */
+
 
 //ligar o servidor
 server.listen(3000);

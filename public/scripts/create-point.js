@@ -11,6 +11,33 @@
 
 // button.addEventListener("click", validateItems);
 
+function getItems () {
+  const itemsGrid = document.querySelector("[name=itemsList]");
+
+  const url = `/itemsCollect`;
+
+  console.log("itemsCollect")
+  let grid = "";
+  fetch(url)
+    .then((res) => res.json())
+    .then((items) => {
+      for (const item of items) {
+        grid += `<li data-id="${item.id}">`;
+        grid += `  <img src="${item.image}" alt="${item.description}">`;
+        grid += `  <span>${item.description}</span>`;
+        grid += `</li>`;
+        itemsGrid.innerHTML = grid;
+        itemsGrid.addEventListener("click", handleSelectedItem);
+
+      }
+
+    })
+    .catch((error) => {
+      console.error('Error: ', error);
+    });
+}
+getItems ();
+
 
 function populateUFs() {
   const ufSelect = document.querySelector("select[name=uf]");
@@ -62,12 +89,6 @@ document.querySelector("select[name=uf]").addEventListener("change", getCities);
               Ítens de coleta
   =======================================
 */
-//Pegar todos os items do campo li
-const itemsToCollect = document.querySelectorAll(".items-grid li");
-
-for (const item of itemsToCollect) {
-  item.addEventListener("click", handleSelectedItem);
-}
 
 const collectedItems = document.querySelector("input[name=items]");
 
