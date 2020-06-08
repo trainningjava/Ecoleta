@@ -19,12 +19,12 @@ db.serialize(() => {
  */
 
 
-  const step=1
+  const step=3
 // COM COMMANDOS SQL QUE EU VOU:
 
-    console.log("=========================================================")
-    console.log("C R E A T E")
-    console.log("=========================================================")
+    // console.log("=========================================================")
+    // console.log("C R E A T E")
+    // console.log("=========================================================")
     // Criar uma tabela
     db.run(`
     CREATE TABLE IF NOT EXISTS places (
@@ -73,7 +73,7 @@ console.log("=========================================================")
   "address2":"Nº 260",
   "state":"Santa Catarina",
   "city":"Rio do Sul",
-  "items":"Resíduos Eletrônicos, Lâmpadas",
+  "items":"1,4",
   }, {
   
       "image":"https://images.unsplash.com/photo-1567393528677-d6adae7d4a0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
@@ -82,7 +82,7 @@ console.log("=========================================================")
       "address2":"Nº 260",
       "state":"Santa Catarina",
       "city":"Rio do Sul",
-      "items":"Papéis e Papelão",
+      "items":"3",
   }];
 
   runInsertData();
@@ -101,7 +101,7 @@ console.log("=========================================================")
       "description":"Pilhas e Baterias",
       "image":"/assets/baterias.svg"
     }, {
-      "description":">Papéis e Papelão",
+      "description":"Papéis e Papelão",
       "image":"/assets/papeis-papelao.svg"
     }, {
       "description":"Resíduos Eletrônicos",
