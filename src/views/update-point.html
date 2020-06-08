@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 
-{% set pageId = "page-create-point" %}
+{% set pageId = "page-update-point" %}
 
 {% block title %}
-  <title>Criar um ponto de coleta</title>
+  <title>Atualizar um ponto de coleta</title>
 {% endblock title %}
 
 {% block style %}
@@ -14,8 +14,8 @@
 {% block content %}
   {% include "partials/page-header.html" %}
 
-  <form action="/savepoint" method="POST">
-    <h1>Cadastro do ponto de coleta</h1>
+  <form action="/" name="frm" method="POST">
+    <h1>Atualize do ponto de coleta</h1>
     <fieldset>
       <legend>
         <h2>Dados da entidade</h2>
@@ -24,11 +24,11 @@
       <div class="field-group">
         <div class="field">
           <label for="name">Nome da entidade*</label>
-          <input type="text" name="name" required="required"/>
+          <input type="text" name="name" value="{{regtems[0].name}}" required="required"/>
         </div>
         <div class="field">
           <label for="name">Imagem da entidade*</label>
-          <input type="url" name="image" placeholder="http://" required="required"/>
+          <input type="url" name="image" placeholder="http://" value="{{regtems[0].image}}" required="required"/>
         </div>
       </div>
 
@@ -36,11 +36,11 @@
         <div class="field-group">
           <div class="field">
             <label for="address">Endereço*</label>
-            <input type="text" name="address" required="required"/>
+            <input type="text" name="address" value="{{regtems[0].address}}" required="required"/>
           </div>
           <div class="field">
             <label for="address2">Número/Complemento*</label>
-            <input type="text" name="address2" required="required"/>
+            <input type="text" name="address2" value="{{regtems[0].address2}}" required="required"/>
           </div>
         </div>
 
@@ -51,12 +51,15 @@
               <option value="">Selecione o Estado</option>
             </select>
             <input type="hidden" name="state">
+            <input type="hidden" name="uf1" value="{{regtems[0].state}}">
+            <input type="hidden" name="ufid">
           </div>
           <div class="field">
             <label for="city">Cidade*</label>
             <select name="city" disabled="disabled" required="required">
               <option value="">Selecione o Cidade</option>
             </select>
+            <input type="hidden" name="city1" value="{{regtems[0].city}}">
           </div>
         </div>
         <div class="field-group">
@@ -75,9 +78,11 @@
 
         <div class="items-grid" name="itemsList"> 
         </div>
-        <input type="hidden" name="items">
+        <input type="text" name="items" value="{{regtems[0].items}}">
+        <input type="text" name="id" value="{{regtems[0].id}}">
       </fieldset>
-      <button type="submit">Cadastrar ponto de coleta</button>
+      <button type="submit" name="upd">Atualiza ponto de coleta</button>
+      <button type="submit" name="del">Apaga ponto de coleta</button>
     </form>
   {% endblock content %}
 
@@ -90,5 +95,5 @@
   {% endblock modal %}
 
   {% block scripts %}
-    <script src="/scripts/create-point.js"></script>
+    <script src="/scripts/update-point.js"></script>
   {% endblock scripts %}

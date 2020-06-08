@@ -16,7 +16,6 @@ function getItems () {
 
   const url = `/itemsCollect`;
 
-  console.log("itemsCollect")
   let grid = "";
   fetch(url)
     .then((res) => res.json())

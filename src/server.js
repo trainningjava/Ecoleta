@@ -62,7 +62,7 @@ server.post("/savepoint", (req, res) => {
     req.body.address2,
     req.body.state,
     req.body.city,
-    req.body.items,
+    req.body.items
   ];
 
   function afterInsertData(err) {
@@ -75,7 +75,7 @@ server.post("/savepoint", (req, res) => {
 
     console.log("Cadastrado com sucesso");
     console.log(this);
-    return res.render("create-point.html", { saved: true });
+    return res.render("create-point.html", { saved: true, msgtxt: "Cadastro concluído"});
   }
   db.run(query, values, afterInsertData);
 });
@@ -138,21 +138,93 @@ server.get("/updsrpoint", (req, res) => {
   const id = req.query.id;
   db.all(`SELECT * FROM places WHERE id = ?`, [id], function (
     err,
-    items
+    rows
   ) {
     if (err) {
       console.log(err);
       console.log("Erro na consulta");
     }
-    console.log(items);
-  
+    return res.render("update-point.html", { regtems: rows });
+ 
   });
 });
 
 /* ============================================================== */
-/*                         U P D A T E                            */
+/*                          U P D P O I N T                       */
 /* ============================================================== */
+server.post("/updpoint", (req, res) => {
 
+  if (req.body.items == "" ) {
+    return res.render("update-point.html", { msg: true, msgtxt: "Selecione um ou mais itens de coleta" });    
+  }
+
+  const query = `
+  UPDATE places
+    SET image = ?,
+     name = ?,
+     address = ?,
+     address2 = ?,
+     state = ?,
+     city = ?,
+     items = ?
+    WHERE id = ?
+`;
+
+  const values = [
+    req.body.image,
+    req.body.name,
+    req.body.address,
+    req.body.address2,
+    req.body.state,
+    req.body.city,
+    req.body.items,
+    req.body.id
+  ];
+
+  function afterUpdData(err) {
+    if (err) {
+      console.log("Erro na atualizacao");
+      console.log(err);
+      // return res.send("Erro no cadastro");
+      return res.render("update-point.html", { msg: true, msgtxt: "Erro na atualizacao" });
+    }
+
+    console.log("Atualizado com sucesso");
+    console.log(this);
+    return res.render("update-point.html", { saved: true, msgtxt: "Atualização concluído"});
+  }
+  console.log(values)
+  db.run(query, values, afterUpdData);
+});
+
+/* ============================================================== */
+/*                          D E L P O I N T                       */
+/* ============================================================== */
+server.post("/delpoint", (req, res) => {
+
+  const query = `
+  DELETE FROM places
+    WHERE id = ?
+`;
+
+  const values = [
+    req.body.id
+  ];
+
+  function afterDelData(err) {
+    if (err) {
+      console.log("Erro ao excluir");
+      console.log(err);
+      // return res.send("Erro no cadastro");
+      return res.render("update-point.html", { msg: true, msgtxt: "Erro ao excluir" });
+    }
+
+    console.log("Excluido com sucesso");
+    console.log(this);
+    return res.render("update-point.html", { saved: true, msgtxt: "Excluido com sucesso"});
+  }
+db.run(query, values, afterDelData);
+});
 
 //ligar o servidor
 server.listen(3000);
