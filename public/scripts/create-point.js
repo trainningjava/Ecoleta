@@ -21,7 +21,7 @@ function getItems () {
     .then((res) => res.json())
     .then((items) => {
       for (const item of items) {
-        grid += `<li data-id="${item.id}">`;
+        grid += `<li data-id="${item.description}">`;
         grid += `  <img src="${item.image}" alt="${item.description}">`;
         grid += `  <span>${item.description}</span>`;
         grid += `</li>`;
