@@ -15,23 +15,28 @@ function frmDel() {
 bupd.addEventListener("click", frmUpd);
 bdel.addEventListener("click", frmDel);
 
+
 function getItems () {
   const itemsGrid = document.querySelector("[name=itemsList]");
   const itemsList = document.querySelector("input[name=items]");
 
   const url = `/itemsCollect`;
-  let selectedItems = itemsList.value;
-
+  let selectedItems = []
+  selectedItems = itemsList.value.split(',');
 
   let grid = "";
   fetch(url)
     .then((res) => res.json())
     .then((items) => {
       for (const item of items) {
-        const itemFound = selectedItems.includes(item.id);
+
+        const alreadySelected = selectedItems.findIndex((item1) => {
+          const itemFound = item1 == item.id;
+          return itemFound;
+        });
 
       // se já estiver SELECIONADOS, tirar da selação
-        if (itemFound) {
+        if (alreadySelected >= 0) {
           grid += `<li data-id="${item.id}" class="selected">`;
         } else {
           grid += `<li data-id="${item.id}">`;
@@ -154,7 +159,8 @@ const collectedItems = document.querySelector("[name=items]");
 
 //Lista de Ítens de coleta
 let selectedItems = []
-selectedItems.push(collectedItems.value)
+
+selectedItems = collectedItems.value.split(',');
 
 function handleSelectedItem(event) {
   
@@ -167,8 +173,8 @@ function handleSelectedItem(event) {
   Verificar se existem ITENS selecionados, 
   se sim pegar os ITENS selecionados
  */
-const alreadySelected = selectedItems.findIndex((item) => {
-  const itemFound = item == itemId;
+const alreadySelected = selectedItems.findIndex((item1) => {
+  const itemFound = item1 == itemId;
   return itemFound;
 });
 

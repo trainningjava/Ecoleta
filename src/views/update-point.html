@@ -50,7 +50,7 @@
             <select name="uf">
               <option value="">Selecione o Estado</option>
             </select>
-            <input type="hidden" name="state">
+            <input type="hidden" name="state" value="{{regtems[0].state}}">
             <input type="hidden" name="uf1" value="{{regtems[0].state}}">
             <input type="hidden" name="ufid">
           </div>
@@ -78,8 +78,8 @@
 
         <div class="items-grid" name="itemsList"> 
         </div>
-        <input type="text" name="items" value="{{regtems[0].items}}">
-        <input type="text" name="id" value="{{regtems[0].id}}">
+        <input type="hidden" name="items" value="{{regtems[0].items}}">
+        <input type="hidden" name="id" value="{{regtems[0].id}}">
       </fieldset>
       <button type="submit" name="upd">Atualiza ponto de coleta</button>
       <button type="submit" name="del">Apaga ponto de coleta</button>

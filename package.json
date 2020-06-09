@@ -1,7 +1,8 @@
 {
   "name": "nlw",
   "scripts": {
-    "start": "start http://localhost:3000 && nodemon src/server.js"
+    "start": "start http://localhost:3000 && nodemon src/server.js",
+    "debug": "start http://localhost:3000 && nodemon --inspect ./src/server.js"    
   },
   "dependencies": {
     "express": "^4.17.1",
