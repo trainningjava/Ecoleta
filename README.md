@@ -6,7 +6,7 @@ Treinamento Rocketseat - Semana NLW
 </h1>
   
 <p align="center">
-  <img width="250" src="./public/assets/wallpapers/nlw.jfif">
+  <img width="250" src="./public/assets/img/nlw.jfif">
 </p>
 
 _________
