@@ -81,8 +81,15 @@
         <input type="hidden" name="items" value="{{regtems[0].items}}">
         <input type="hidden" name="id" value="{{regtems[0].id}}">
       </fieldset>
-      <button type="submit" name="upd">Atualiza ponto de coleta</button>
-      <button type="submit" name="del">Apaga ponto de coleta</button>
+      <div class="field-group">
+        <div class="field">
+          <button type="submit" name="upd">Atualiza ponto de coleta</button>
+        </div>
+        <div class="field">
+          <button type="submit" name="del">Apaga ponto de coleta</button>
+        </div>
+      </div>
+
     </form>
   {% endblock content %}
 

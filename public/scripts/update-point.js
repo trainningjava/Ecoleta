@@ -31,15 +31,15 @@ function getItems () {
       for (const item of items) {
 
         const alreadySelected = selectedItems.findIndex((item1) => {
-          const itemFound = item1 == item.id;
+          const itemFound = item1 == item.description;
           return itemFound;
         });
 
       // se já estiver SELECIONADOS, tirar da selação
         if (alreadySelected >= 0) {
-          grid += `<li data-id="${item.id}" class="selected">`;
+          grid += `<li data-id="${item.description}" class="selected">`;
         } else {
-          grid += `<li data-id="${item.id}">`;
+          grid += `<li data-id="${item.description}">`;
         }
         grid += `  <img src="${item.image}" alt="${item.description}">`;
         grid += `  <span>${item.description}</span>`;

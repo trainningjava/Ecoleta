@@ -2,12 +2,14 @@
 const sqlite3 = require("sqlite3").verbose();
 
 // Criar o objeto que irá fazer operações no banco de dados
-const db = new sqlite3.Database("./src/database/database.db", sqlite3.OPEN_READWRITE, (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log('Connected to the database.');
-});
+const db = new sqlite3.Database("./src/database/database.db");
+
+// const db = new sqlite3.Database("./src/database/database.db", sqlite3.OPEN_READWRITE, (err) => {
+//   if (err) {
+//     console.error(err.message);
+//   }
+//   console.log('Connected to the database.');
+// });
 
 module.exports = db;
 
@@ -94,8 +96,8 @@ db.serialize(() => {
         "name":"Boxer",
         "address":"Guilherme Gemballa, Centro",
         "address2":"Nº 322",
-        "state":"Santa Catarina",
-        "city":"Rio do Sul",
+        "state":"São Paulo",
+        "city":"Avaí",
         "items":"Papéis e Papelão",
     }];
 
