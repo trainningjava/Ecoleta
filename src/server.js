@@ -38,9 +38,11 @@ server.get("/create-point", (req, res) => {
 /*                         S A V E P O I N T                      */
 /* ============================================================== */
 server.post("/savepoint", (req, res) => {
-
-  if (req.body.items == "" ) {
-    return res.render("create-point.html", { msg: true, msgtxt: "Selecione um ou mais itens de coleta" });    
+  if (req.body.items == "") {
+    return res.render("create-point.html", {
+      msg: true,
+      msgtxt: "Selecione um ou mais itens de coleta",
+    });
   }
 
   const query = `
@@ -62,7 +64,7 @@ server.post("/savepoint", (req, res) => {
     req.body.address2,
     req.body.state,
     req.body.city,
-    req.body.items
+    req.body.items,
   ];
 
   function afterInsertData(err) {
@@ -70,12 +72,18 @@ server.post("/savepoint", (req, res) => {
       console.log("Erro no cadastro");
       console.log(err);
       // return res.send("Erro no cadastro");
-      return res.render("create-point.html", { msg: true, msgtxt: "Erro no cadastro" });
+      return res.render("create-point.html", {
+        msg: true,
+        msgtxt: "Erro no cadastro",
+      });
     }
 
     console.log("Cadastrado com sucesso");
     console.log(this);
-    return res.render("create-point.html", { saved: true, msgtxt: "Cadastro concluído"});
+    return res.render("create-point.html", {
+      saved: true,
+      msgtxt: "Cadastro concluído",
+    });
   }
   db.run(query, values, afterInsertData);
 });
@@ -84,10 +92,7 @@ server.post("/savepoint", (req, res) => {
 /*                         S E A R C H                            */
 /* ============================================================== */
 server.get("/itemsCollect", (req, res) => {
-  db.all(`SELECT * FROM items `, function (
-    err,
-    items
-  ) {
+  db.all(`SELECT * FROM items `, function (err, items) {
     if (err) {
       console.log(err);
       console.log("Erro na consulta");
@@ -95,10 +100,8 @@ server.get("/itemsCollect", (req, res) => {
     const total = items.length;
     console.log(items);
     return res.json(items);
-  
   });
 });
-
 
 server.get("/search", (req, res) => {
   const search = req.query.search;
@@ -113,10 +116,7 @@ server.get("/search", (req, res) => {
 
   // Pegar os dados do banco de dados
   // db.all(`SELECT * FROM places WHERE city LIKE '%${search}%'`, function (
-  db.all(`SELECT * FROM places `, function (
-    err,
-    rows
-  ) {
+  db.all(`SELECT * FROM places `, function (err, rows) {
     if (err) {
       console.log(err);
       return res.send("Erro na consulta");
@@ -136,16 +136,12 @@ server.get("/search", (req, res) => {
 /* ============================================================== */
 server.get("/updsrpoint", (req, res) => {
   const id = req.query.id;
-  db.all(`SELECT * FROM places WHERE id = ?`, [id], function (
-    err,
-    rows
-  ) {
+  db.all(`SELECT * FROM places WHERE id = ?`, [id], function (err, rows) {
     if (err) {
       console.log(err);
       console.log("Erro na consulta");
     }
     return res.render("update-point.html", { regtems: rows });
- 
   });
 });
 
@@ -153,9 +149,11 @@ server.get("/updsrpoint", (req, res) => {
 /*                          U P D P O I N T                       */
 /* ============================================================== */
 server.post("/updpoint", (req, res) => {
-
-  if (req.body.items == "" ) {
-    return res.render("update-point.html", { msg: true, msgtxt: "Selecione um ou mais itens de coleta" });    
+  if (req.body.items == "") {
+    return res.render("update-point.html", {
+      msg: true,
+      msgtxt: "Selecione um ou mais itens de coleta",
+    });
   }
 
   const query = `
@@ -178,7 +176,7 @@ server.post("/updpoint", (req, res) => {
     req.body.state,
     req.body.city,
     req.body.items,
-    req.body.id
+    req.body.id,
   ];
 
   function afterUpdData(err) {
@@ -186,14 +184,20 @@ server.post("/updpoint", (req, res) => {
       console.log("Erro na atualizacao");
       console.log(err);
       // return res.send("Erro no cadastro");
-      return res.render("update-point.html", { msg: true, msgtxt: "Erro na atualizacao" });
+      return res.render("update-point.html", {
+        msg: true,
+        msgtxt: "Erro na atualizacao",
+      });
     }
 
     console.log("Atualizado com sucesso");
     console.log(this);
-    return res.render("update-point.html", { saved: true, msgtxt: "Atualização concluído"});
+    return res.render("update-point.html", {
+      saved: true,
+      msgtxt: "Atualização concluído",
+    });
   }
-  console.log(values)
+  console.log(values);
   db.run(query, values, afterUpdData);
 });
 
@@ -201,29 +205,32 @@ server.post("/updpoint", (req, res) => {
 /*                          D E L P O I N T                       */
 /* ============================================================== */
 server.post("/delpoint", (req, res) => {
-
   const query = `
   DELETE FROM places
     WHERE id = ?
 `;
 
-  const values = [
-    req.body.id
-  ];
+  const values = [req.body.id];
 
   function afterDelData(err) {
     if (err) {
       console.log("Erro ao excluir");
       console.log(err);
       // return res.send("Erro no cadastro");
-      return res.render("update-point.html", { msg: true, msgtxt: "Erro ao excluir" });
+      return res.render("update-point.html", {
+        msg: true,
+        msgtxt: "Erro ao excluir",
+      });
     }
 
     console.log("Excluido com sucesso");
     console.log(this);
-    return res.render("update-point.html", { saved: true, msgtxt: "Excluido com sucesso"});
+    return res.render("update-point.html", {
+      saved: true,
+      msgtxt: "Excluido com sucesso",
+    });
   }
-db.run(query, values, afterDelData);
+  db.run(query, values, afterDelData);
 });
 
 //ligar o servidor

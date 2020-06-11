@@ -1,106 +1,116 @@
-{% extends "layout.html" %}
-
-{% set pageId = "page-update-point" %}
-
+{% extends "layout.html" %} 
+{% set pageId = "page-update-point" %} 
 {% block title %}
-  <title>Atualizar um ponto de coleta</title>
-{% endblock title %}
-
+<title>Atualizar um ponto de coleta</title>
+{% endblock title %} 
 {% block style %}
-  <link rel="stylesheet" href="/styles/create-point.css"/>
-  <link rel="stylesheet" href="/styles/modal.css"/>
-{% endblock style %}
+<link rel="stylesheet" href="/styles/create-point.css" />
+<link rel="stylesheet" href="/styles/modal.css" />
+{% endblock style %} 
+{% block content %} 
+{% include "partials/page-header.html" %}
 
-{% block content %}
-  {% include "partials/page-header.html" %}
+<form action="/" name="frm" method="POST">
+  <h1>Atualize do ponto de coleta</h1>
+  <fieldset>
+    <legend>
+      <h2>Dados da entidade</h2>
+    </legend>
 
-  <form action="/" name="frm" method="POST">
-    <h1>Atualize do ponto de coleta</h1>
-    <fieldset>
-      <legend>
-        <h2>Dados da entidade</h2>
-      </legend>
-
-      <div class="field-group">
-        <div class="field">
-          <label for="name">Nome da entidade*</label>
-          <input type="text" name="name" value="{{regtems[0].name}}" required="required"/>
-        </div>
-        <div class="field">
-          <label for="name">Imagem da entidade*</label>
-          <input type="url" name="image" placeholder="http://" value="{{regtems[0].image}}" required="required"/>
-        </div>
+    <div class="field-group">
+      <div class="field">
+        <label for="name">Nome da entidade*</label>
+        <input
+          type="text"
+          name="name"
+          value="{{regtems[0].name}}"
+          required="required"
+        />
       </div>
-
-
-        <div class="field-group">
-          <div class="field">
-            <label for="address">Endereço*</label>
-            <input type="text" name="address" value="{{regtems[0].address}}" required="required"/>
-          </div>
-          <div class="field">
-            <label for="address2">Número/Complemento*</label>
-            <input type="text" name="address2" value="{{regtems[0].address2}}" required="required"/>
-          </div>
-        </div>
-
-        <div class="field-group">
-          <div class="field">
-            <label for="state">Estado*</label>
-            <select name="uf">
-              <option value="">Selecione o Estado</option>
-            </select>
-            <input type="hidden" name="state" value="{{regtems[0].state}}">
-            <input type="hidden" name="uf1" value="{{regtems[0].state}}">
-            <input type="hidden" name="ufid">
-          </div>
-          <div class="field">
-            <label for="city">Cidade*</label>
-            <select name="city" disabled="disabled" required="required">
-              <option value="">Selecione o Cidade</option>
-            </select>
-            <input type="hidden" name="city1" value="{{regtems[0].city}}">
-          </div>
-        </div>
-        <div class="field-group">
-          <div class="field">
-            <label id="msg" for="msg">*Os campos são obrigatórios</label>
-          </div>
-        </div>
-        </fieldset>
-
-      <!-- ======================================= Ítens de coleta ======================================= -->
-      <fieldset>
-        <legend>
-          <h2>Itens de coleta</h2>
-          <span>Selecione um ou mais itens abaixo</span>
-        </legend>
-
-        <div class="items-grid" name="itemsList"> 
-        </div>
-        <input type="hidden" name="items" value="{{regtems[0].items}}">
-        <input type="hidden" name="id" value="{{regtems[0].id}}">
-      </fieldset>
-      <div class="field-group">
-        <div class="field">
-          <button type="submit" name="upd">Atualiza ponto de coleta</button>
-        </div>
-        <div class="field">
-          <button type="submit" name="del">Apaga ponto de coleta</button>
-        </div>
+      <div class="field">
+        <label for="name">Imagem da entidade*</label>
+        <input
+          type="url"
+          name="image"
+          placeholder="http://"
+          value="{{regtems[0].image}}"
+          required="required"
+        />
       </div>
+    </div>
 
-    </form>
-  {% endblock content %}
+    <div class="field-group">
+      <div class="field">
+        <label for="address">Endereço*</label>
+        <input
+          type="text"
+          name="address"
+          value="{{regtems[0].address}}"
+          required="required"
+        />
+      </div>
+      <div class="field">
+        <label for="address2">Número/Complemento*</label>
+        <input
+          type="text"
+          name="address2"
+          value="{{regtems[0].address2}}"
+          required="required"
+        />
+      </div>
+    </div>
 
-  {% block modal %}
+    <div class="field-group">
+      <div class="field">
+        <label for="state">Estado*</label>
+        <select name="uf">
+          <option value="">Selecione o Estado</option>
+        </select>
+        <input type="hidden" name="state" value="{{regtems[0].state}}" />
+        <input type="hidden" name="uf1" value="{{regtems[0].state}}" />
+        <input type="hidden" name="ufid" />
+      </div>
+      <div class="field">
+        <label for="city">Cidade*</label>
+        <select name="city" disabled="disabled" required="required">
+          <option value="">Selecione o Cidade</option>
+        </select>
+        <input type="hidden" name="city1" value="{{regtems[0].city}}" />
+      </div>
+    </div>
+    <div class="field-group">
+      <div class="field">
+        <label id="msg" for="msg">*Os campos são obrigatórios</label>
+      </div>
+    </div>
+  </fieldset>
 
-    {% if saved or msg %}
-      {% include "partials/point-created.html"%}
-    {% endif %}
+  <!-- ======================================= Ítens de coleta ======================================= -->
+  <fieldset>
+    <legend>
+      <h2>Itens de coleta</h2>
+      <span>Selecione um ou mais itens abaixo</span>
+    </legend>
 
-  {% endblock modal %}
-
-  {% block scripts %}
-    <script src="/scripts/update-point.js"></script>
-  {% endblock scripts %}
+    <div class="items-grid" name="itemsList"></div>
+    <input type="hidden" name="items" value="{{regtems[0].items}}" />
+    <input type="hidden" name="id" value="{{regtems[0].id}}" />
+  </fieldset>
+  <div class="field-group">
+    <div class="field">
+      <button type="submit" name="upd">Atualiza ponto de coleta</button>
+    </div>
+    <div class="field">
+      <button type="submit" name="del">Apaga ponto de coleta</button>
+    </div>
+  </div>
+</form>
+{% endblock content %} 
+{% block modal %} 
+  {% if saved or msg %} 
+    {% include "partials/point-created.html"%} 
+  {% endif %} 
+{% endblock modal %} 
+{% block scripts %}
+<script src="/scripts/update-point.js"></script>
+{% endblock scripts %}

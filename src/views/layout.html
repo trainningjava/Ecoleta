@@ -2,34 +2,33 @@
 
 <html lang="pt_br">
   <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     {% block title %}
-      <title>Ecoleta</title>
+    <title>Ecoleta</title>
     {% endblock title %}
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@300;700&display=swap" rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="/styles/main.css"/>
+    <link rel="stylesheet" href="/styles/main.css" />
 
-    {% block style %}
-    {% endblock style %}
+    {% block style %} {% endblock style %}
 
-    <link rel="stylesheet" href="/styles/responsive.css"/>
-
+    <link rel="stylesheet" href="/styles/responsive.css" />
   </head>
+
   <body>
     <div id="{{pageId}}">
-      {% block content %}
-      {% endblock content %}
+      {% block content %} {% endblock content %}
     </div>
 
-    {% block modal %}
-    {% endblock modal %}
-
-    {% block scripts %}
+    {% block modal %} 
+    {% endblock modal %} 
+    {% block scripts %} 
     {% endblock scripts %}
-
   </body>
 </html>

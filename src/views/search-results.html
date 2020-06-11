@@ -1,52 +1,49 @@
 {% extends "layout.html" %}
-
 {% set pageId = "page-search-results" %}
-
 {% block title %}
-  <title>Resultado da pesquisa</title>
+<title>Resultado da pesquisa</title>
 {% endblock title %}
-
 {% block style %}
-  <link rel="stylesheet" href="/styles/search-results.css"/>
+<link rel="stylesheet" href="/styles/search-results.css" />
 {% endblock style %}
-
 {% block content %}
-  {% include "partials/page-header.html" %}
+{% include "partials/page-header.html" %}
 
-  <main>
-    {% if total > 0 %}
-      <h4>
-        <strong>{{total}}
-          pontos</strong> encontrados</h4>
+<main>
+  {% if total > 0 %}
+  <h4><strong>{{total}} pontos</strong> encontrados</h4>
+  <p>
+  <h5><strong>Clique na imagem para atualizar ou excluir o ponto</strong></h5>
+  </p>
+  {% for place in places %}
+  {% if (loop.index % 2) != 0 %}
+  </p>
 
-      {% for place in places %}
-        {% if (loop.index % 2) != 0 %}
-          <div class="cards">
-          {% endif %}
-
-          <div class="card">
-            <a href="/updsrpoint?id={{place.id}}" ><img src="{{place.image}}" alt="{{place.name}}"/>
-            </a>
-            <h1>{{place.name}}</h1>
-            <h3>{{place.items}}</h3>
-            <p>
-              {{place.city}},
-              {{place.state}}
-              <br/>
-              {{place.address}}
-              <br/>
-              {{place.address2}}
-            </p>
-          </div>
-          {% if (loop.index % 2) == 0 or loop.index == total %}
-          </div>
-        {% endif %}
-
-      {% endfor %}
-    {% else %}
-      <h4>
-        <strong>Nenhum</strong>
-        local encontrados</h4>
+  <div class="cards">
     {% endif %}
-  </main>
+
+    <div class="card">
+      <a href="/updsrpoint?id={{place.id}}"><img src="{{place.image}}" alt="{{place.name}}" />
+      </a>
+      <h1>{{place.name}}</h1>
+      <h3>{{place.items}}</h3>
+      <p>
+        {{place.city}}, {{place.state}}
+        <br />
+        {{place.address}}
+        <br />
+        {{place.address2}}
+      </p>
+    </div>
+    {% if (loop.index % 2) == 0 or loop.index == total %}
+  </div>
+  {% endif %}
+  {% endfor %}
+  {% else %}
+  <h4>
+    <strong>Nenhum</strong>
+    local encontrados
+  </h4>
+  {% endif %}
+</main>
 {% endblock content %}

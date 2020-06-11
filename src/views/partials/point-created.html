@@ -1,12 +1,11 @@
 <div id="modal" class="point">
   <div class="content">
     {% if saved %}
-      <img src="/assets/check.svg" alt="{{msgtxt}}">
-      <h1>{{msgtxt}}</h1>
-    {% endif %}
-    {% if msg %}
-      <img src="/assets/check.svg" alt="{{msgtxt}}">
-      <h1>{{msgtxt}}</h1>
+    <img src="/assets/check.svg" alt="{{msgtxt}}" />
+    <h1>{{msgtxt}}</h1>
+    {% endif %} {% if msg %}
+    <img src="/assets/check.svg" alt="{{msgtxt}}" />
+    <h1>{{msgtxt}}</h1>
 
     {% endif %}
   </div>
@@ -15,13 +14,13 @@
 {% if msg %}
 <script>
   setTimeout(() => {
-    window.location = "/create-point"
-  }, 3000)
+    window.location = "/create-point";
+  }, 3000);
 </script>
-{% else  %}
-  <script>
-    setTimeout(() => {
-      window.location = "/"
-    }, 2000)
-  </script>
+{% else %}
+<script>
+  setTimeout(() => {
+    window.location = "/";
+  }, 2000);
+</script>
 {% endif %}

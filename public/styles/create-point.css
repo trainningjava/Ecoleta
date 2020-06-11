@@ -32,6 +32,40 @@
   height: 24px;
 }
 
+#page-update-point {
+  width: 90%;
+  max-width: 1100px;
+
+  /* alinhamento de caixa (pelo lado de fora da caixa) */
+  margin: 0 auto;
+}
+
+#page-update-point header {
+  margin-top: 48px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#page-update-point header a {
+  color: var(--title-color);
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+}
+
+#page-update-point header a span {
+  margin-right: 16px;
+  background-image: url("../assets/arrow-left.svg");
+
+  display: flex;
+
+  width: 20px;
+  height: 24px;
+}
+
 form {
   background-color: white;
 

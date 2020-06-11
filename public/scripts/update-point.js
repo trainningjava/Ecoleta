@@ -1,13 +1,13 @@
- const bupd = document.querySelector("button[name=upd]");
- const bdel = document.querySelector("button[name=del]");
+const bupd = document.querySelector("button[name=upd]");
+const bdel = document.querySelector("button[name=del]");
 
 function frmUpd() {
-  const frm = document.querySelector("form[name=frm]"); 
+  const frm = document.querySelector("form[name=frm]");
   frm.setAttribute('action', "/updpoint")
 }
 
 function frmDel() {
-  const frm = document.querySelector("form[name=frm]"); 
+  const frm = document.querySelector("form[name=frm]");
   frm.setAttribute('action', "/delpoint")
 }
 
@@ -16,7 +16,7 @@ bupd.addEventListener("click", frmUpd);
 bdel.addEventListener("click", frmDel);
 
 
-function getItems () {
+function getItems() {
   const itemsGrid = document.querySelector("[name=itemsList]");
   const itemsList = document.querySelector("input[name=items]");
 
@@ -35,7 +35,7 @@ function getItems () {
           return itemFound;
         });
 
-      // se já estiver SELECIONADOS, tirar da selação
+        // se já estiver SELECIONADOS, tirar da selação
         if (alreadySelected >= 0) {
           grid += `<li data-id="${item.description}" class="selected">`;
         } else {
@@ -54,10 +54,10 @@ function getItems () {
       console.error('Error: ', error);
     });
 
-    
-  
+
+
 }
-getItems ();
+getItems();
 
 function populateUFs() {
   const ufSelect = document.querySelector("select[name=uf]");
@@ -126,9 +126,9 @@ function getCities1() {
     citySelect.innerHTML = "";
 
     stateInput.value = state1Input;
-  
+
     const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${ufValue}/municipios?orderBy=nome`;
-  
+
     fetch(url)
       .then((res) => res.json())
       .then((cities) => {
@@ -139,16 +139,16 @@ function getCities1() {
             citySelect.innerHTML += `<option value="${city.nome}">${city.nome}</option>`;
           }
         }
-  
+
         citySelect.disabled = false;
       });
     stateid.value = ""
-  
+
   }
-   
+
 }
 
-document.querySelector("select[name=uf]").addEventListener ("change", getCities);
+document.querySelector("select[name=uf]").addEventListener("change", getCities);
 
 /*
   =======================================
@@ -163,7 +163,7 @@ let selectedItems = []
 selectedItems = collectedItems.value.split(',');
 
 function handleSelectedItem(event) {
-  
+
   //Adicionar ou remover uma classe com js
   const itemLi = event.target;
   itemLi.classList.toggle("selected");
@@ -173,18 +173,18 @@ function handleSelectedItem(event) {
   Verificar se existem ITENS selecionados, 
   se sim pegar os ITENS selecionados
  */
-const alreadySelected = selectedItems.findIndex((item1) => {
-  const itemFound = item1 == itemId;
-  return itemFound;
-});
+  const alreadySelected = selectedItems.findIndex((item1) => {
+    const itemFound = item1 == itemId;
+    return itemFound;
+  });
 
-// se já estiver SELECIONADOS, tirar da selação
-if (alreadySelected >= 0) {
-  // tirar da seleção
-  const filteredItems = selectedItems.filter((item) => {
-    const itemIsDifferent = item != itemId;
-    return itemIsDifferent;
-  }); 
+  // se já estiver SELECIONADOS, tirar da selação
+  if (alreadySelected >= 0) {
+    // tirar da seleção
+    const filteredItems = selectedItems.filter((item) => {
+      const itemIsDifferent = item != itemId;
+      return itemIsDifferent;
+    });
 
     // console.log(itemIsDifferent);
     selectedItems = filteredItems;

@@ -11,7 +11,7 @@
 
 // button.addEventListener("click", validateItems);
 
-function getItems () {
+function getItems() {
   const itemsGrid = document.querySelector("[name=itemsList]");
 
   const url = `/itemsCollect`;
@@ -35,7 +35,7 @@ function getItems () {
       console.error('Error: ', error);
     });
 }
-getItems ();
+getItems();
 
 
 function populateUFs() {
