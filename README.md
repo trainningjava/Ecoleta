@@ -25,7 +25,9 @@ O Ecoleta é um projeto criado para gerenciar o processo de coleta de lixo nas c
 * HTML
 * CSS
 * JavaScript
-* Template engine: Nunjucks
+
+Template engine: 
+* Nunjucks
 
 ## Back-end:
 
